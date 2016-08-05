@@ -14,5 +14,7 @@ def guardar_tipo_cambio():
     cliente = Client('http://www.banguat.gob.gt/variables/ws/TipoCambio.asmx?WSDL')
     tipo_cambio_dia = cliente.service.TipoCambioDia().CambioDolar.VarDolar[0].referencia
     fecha_tipo_cambio = cliente.service.TipoCambioDia().CambioDolar.VarDolar[0].fecha
+    aux = fecha_tipo_cambio.split('/')
+    fecha_tipo_cambio = aux[2].strip() + '-' + aux[1].strip() + '-' + aux[0].strip()
     temp =Tipo_Cambio(fecha = fecha_tipo_cambio, cambio = tipo_cambio_dia)
     temp.save()
